@@ -1,0 +1,20 @@
+---
+title: "Método"
+format: html
+---
+
+Se realizaron 13 entrevistas semiestructuradas a investigadores empíricos de ciencias sociales, seleccionados a partir de un muestreo aleatorio simple por criterios. El marco muestral consideró a todos los académicos que se hubiesen adjudicado un Proyecto Fondecyt Regular entre 2018 y 2019, en los grupos de estudio Antropología y Arqueología, Ciencias económicas y administrativas, Ciencias jurídicas y políticas, Sicología y Sociología. Considerando cuotas por sexo y grupo de estudio, se seleccionaron aleatoriamente uno o dos informantes por sexo para cada grupo de estudio. Se excluyeron los casos en que los investigadores seleccionados se abocaran estrictamente a la investigación teórica. Asimismo, se excluyeron casos como: a) investigadores del grupo de estudio Ciencias jurídicas y políticas dedicados a la investigación filosófica; b) investigadores del grupo de estudio Antropología y Arqueología no dedicados a la antropología social; c) investigadores del grupo de estudio Sicología abocados a la neurociencia. También, dado que el grupo de estudio de sociología está compuesto por investigadores de otras disciplinas, como la psicología social y el trabajo social, se aleatorizó hasta asegurar la selección de, al menos, un sociólogo. La siguiente tabla da cuenta de la composición final de la muestra:
+
+|Grupo de estudio | Hombre | Mujer |
+|----|---|----|
+|Antropología y arqueología (Antropología) | 0 |2
+|Ciencias económicas y administrativas (Economía) | 1 | 1
+|Ciencias jurídicas y políticas (Ciencia política) | 2 |1
+|Psicología |1| 2
+|Sociología |1| 2
+
+Las entrevistas semiestructuradas se realizaron a través de videollamada, con una duración entre cuarenta minutos y una hora. Se abordaron tópicos relativos a la familiarización y conocimiento de los investigadores respecto a la ciencia abierta, su participación en prácticas de ciencia abierta, sus actitudes y valoraciones frente a prácticas de apertura y transparencia, así como frente a una futura posible obligatoriedad de tales, entre otros. 
+
+Se empleó análisis temático, en tanto es un método que permite identificar y describir patrones de significados (Braun & Clarke 2006), así como el conjunto de relaciones y jerarquías que entre estos se generan, organizados en torno al concepto de ciencia abierta y las ideas asociadas a este, a partir de códigos tanto semánticos como latentes (Boyatzis, 1998). En este sentido, este método es particularmente útil para comprender los puntos de vista, conocimientos, experiencias y valores de los participantes respecto a la ciencia abierta, a partir del conjunto de datos. 
+
+El análisis fue realizado principalmente por dos investigadores, apoyado por el software de análisis cualitativo ATLAS.ti en su versión 9.0.5. El proceso de codificación fue realizado simultáneamente por ambos investigadores y discutido en reuniones periódicas con el equipo de investigación, con fines de asegurar triangulación entre investigadores a lo largo del proceso de análisis (Nowell et al., 2017). Asimismo, se archivaron sistemáticamente versiones del proyecto y sus productos, a la vez que se llevó el registro de las reflexiones personales de los investigadores y las discusiones de equipo en torno al análisis en un diario reflexivo, para poder resguardar la auditabilidad del proceso de investigación (Silver y Lewins, 2007).  

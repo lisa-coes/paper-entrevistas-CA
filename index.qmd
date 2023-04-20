@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+Este documento contiene el paper cualitativo sobre prácticas, creencias y actitudes sobre Ciencia Abierta en académicos de las Ciencias Sociales en Chile. El trabajo de campo de esta fase cualitativa fue desarrollado entre julio y octubre del 2022. En total se entrevistaron a 14 académicos/as de Ciencias Sociales, con representación de distintas disciplinas (Psicología, Sociología, Antropología, Economía) y métodos (cuantitativos y cualitativos). Siempre resguardando representatividad por género y que realizaran investigación empírica.
+
+El repositorio está creado a partir de la plantilla de construcción de Quarto books. Para más información, visitar <https://quarto.org/docs/books>.

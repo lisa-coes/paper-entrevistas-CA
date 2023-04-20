@@ -1,0 +1,11 @@
+---
+title: "Antecedentes"
+format: html
+---
+
+
+a) Revisión ciencia abierta en general (Kevin, práctica)
+
+b) Principales componentes de la ciencia abierta (JC - modelo LISA)
+
+c) Antecedentes políticas de ciencia abierta Chile

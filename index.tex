@@ -1,0 +1,908 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={paper-entrevistas-CA},
+  pdfauthor={LISA - COES},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{paper-entrevistas-CA}
+\author{LISA - COES}
+\date{4/20/23}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, interior hidden, boxrule=0pt, sharp corners, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\bookmarksetup{startatroot}
+
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+Este documento contiene el paper cualitativo sobre prácticas, creencias
+y actitudes sobre Ciencia Abierta en académicos de las Ciencias Sociales
+en Chile. El trabajo de campo de esta fase cualitativa fue desarrollado
+entre julio y octubre del 2022. En total se entrevistaron a 14
+académicos/as de Ciencias Sociales, con representación de distintas
+disciplinas (Psicología, Sociología, Antropología, Economía) y métodos
+(cuantitativos y cualitativos). Siempre resguardando representatividad
+por género y que realizaran investigación empírica.
+
+El repositorio está creado a partir de la plantilla de construcción de
+Quarto books. Para más información, visitar
+\url{https://quarto.org/docs/books}.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{introducciuxf3n}{%
+\chapter{Introducción}\label{introducciuxf3n}}
+
+Durante los últimos años, el mundo académico ha experimentado una serie
+de desafíos relacionados con el concepto de apertura, que pueden
+describirse en dos aspectos principales. El primero se refiere a la
+llamada crisis de replicación (Baker, 2016; Nosek et al., 2015; Peng,
+2015), referida a las dificultades para replicar los resultados de la
+investigación debido a la falta de transparencia en el proceso de
+investigación, donde se ha sido posible evidenciar importantes
+variaciones en los resultados en equipos de investigación con datos
+idénticos (Breznau et al., 2021). Esto ha tenido como consecuencia no
+sólo el fracaso en la replicación de muchos hallazgos publicados, sino
+también el descubrimiento y la denuncia de datos y resultados falsos
+(Chopik et al., 2018) con el fin de lograr publicar en revistas de alto
+impacto. El segundo desafío proviene de la apertura en términos de
+acceso, mediante el cual varias comunidades académicas han reaccionado
+contra las altas barreras de pago y el modelo de negocio impuesto por
+las compañías editoriales para acceder a los productos de la
+investigación científica: las universidades pagan una suscripción para
+acceder al trabajo incluso de sus propios investigadores, y a su vez el
+público fuera de la academia debe pagar nuevamente por obtener productos
+financiados por sus impuestos. Una de las reacciones más comentadas ha
+sido la cancelación de las suscripciones a revistas como Elsevier por
+parte de grandes universidades como UCLA, lo cual posteriormente se
+resolvió a través de un acuerdo basado en la adopción y promoción de
+prácticas en Open Access.
+
+Las barreras en la transparencia y el acceso son síntomas de una cultura
+académica presionada por la publicación de indicadores que están
+sesgados hacia resultados ``significativos'' en términos estadísticos,
+lo que lleva a una tendencia a forzar los resultados (p-hacking),
+llegando incluso a manipular y falsear datos para confirmar las
+hipótesis propuestas (Head et al., 2015) o también el establecer
+hipótesis ad-hoc luego de conocer los resultados de un estudio
+(Hollenbeck \& Wright, 2017; Kerr, 1998). Esto tiene como consecuencia
+que finalmente el principal público objetivo de la ciencia son los
+editores de revistas de alto rango, dejando de lado a otros públicos
+como la sociedad civil, el estado y la ciudadanía. Tal escenario es
+particularmente sensible para las ciencias sociales, que se supone basan
+sus estudios en problemas sociales relevantes para las personas, las
+comunidades y las sociedades en general.
+
+Un número creciente de iniciativas en todo el mundo están abordando
+temas de replicabilidad, transparencia y acceso en la ciencia, como el
+Centro para la Ciencia Abierta (COS), la Iniciativa de Berkeley para la
+Transparencia en Ciencias Sociales (BITSS) y el proyecto Teaching
+Integrity in Empirical Research (TIER). Estas iniciativas fomentan la
+apertura en diferentes etapas del proceso de investigación, como la
+transparencia de los diseños de investigación a través de prerregistros
+de estudios, la reproducibilidad de los análisis y la manipulación de
+datos, así como en la publicación de preimpresiones libres de barreras
+de pago. Muchas de estas prácticas han sido adoptadas por revistas como
+recomendaciones o incluso requisitos para su publicación, así como
+promovidas por instituciones científicas gubernamentales. Todo esto
+implica un gran cambio en la forma de concebir, hacer y enseñar ciencia.
+Además, parece un paso necesario para hacer que la ciencia sea más
+relevante y cercana a quienes están fuera de la academia. En otras
+palabras, sería difícil mejorar la apertura y el intercambio con las
+comunidades locales si el trabajo dentro de la academia es mayormente
+cerrado y no colaborativo.
+
+Como muchos otros desarrollos en la ciencia, el movimiento de la ciencia
+abierta ha llegado lentamente a América Latina, particularmente en las
+ciencias sociales. Aunque ha habido algunas iniciativas en los últimos
+años (como el Congreso de Ciencia Abierta y Ciudadanía en Argentina
+2018, OpenCon LatAm Colombia 2019), la mayoría de ellas son promovidas
+desde las ciencias naturales. En esta línea, a partir del año 2021 la
+Agencia Nacional de Investigación y Desarrollo (ANID) realizará la
+implementación de una \textbf{Política de acceso abierto de información
+científica y datos de investigación}, la cual busca establecer un
+estándar de acceso público a los productos de investigación que hayan
+sido financiados por recursos de ANID, por lo tanto es de carácter
+estratégico desarrollar iniciativas que se propongan contribuir a la
+apertura de la ciencia.
+
+A partir de este diagnóstico, el presente proyecto tiene por objetivo
+analizar el conocimiento, creencias y prácticas de ciencia abierta en
+académic\_s de ciencias sociales en Chile, y desde este análisis generar
+recomendaciones y propuestas tanto para el quehacer académico como a las
+políticas científicas.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{antecedentes}{%
+\chapter{Antecedentes}\label{antecedentes}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Revisión ciencia abierta en general (Kevin, práctica)
+\item
+  Principales componentes de la ciencia abierta (JC - modelo LISA)
+\item
+  Antecedentes políticas de ciencia abierta Chile
+\end{enumerate}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{muxe9todo}{%
+\chapter{Método}\label{muxe9todo}}
+
+Se realizaron 13 entrevistas semiestructuradas a investigadores
+empíricos de ciencias sociales, seleccionados a partir de un muestreo
+aleatorio simple por criterios. El marco muestral consideró a todos los
+académicos que se hubiesen adjudicado un Proyecto Fondecyt Regular entre
+2018 y 2019, en los grupos de estudio Antropología y Arqueología,
+Ciencias económicas y administrativas, Ciencias jurídicas y políticas,
+Sicología y Sociología. Considerando cuotas por sexo y grupo de estudio,
+se seleccionaron aleatoriamente uno o dos informantes por sexo para cada
+grupo de estudio. Se excluyeron los casos en que los investigadores
+seleccionados se abocaran estrictamente a la investigación teórica.
+Asimismo, se excluyeron casos como: a) investigadores del grupo de
+estudio Ciencias jurídicas y políticas dedicados a la investigación
+filosófica; b) investigadores del grupo de estudio Antropología y
+Arqueología no dedicados a la antropología social; c) investigadores del
+grupo de estudio Sicología abocados a la neurociencia. También, dado que
+el grupo de estudio de sociología está compuesto por investigadores de
+otras disciplinas, como la psicología social y el trabajo social, se
+aleatorizó hasta asegurar la selección de, al menos, un sociólogo. La
+siguiente tabla da cuenta de la composición final de la muestra:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule()
+Grupo de estudio & Hombre & Mujer \\
+\midrule()
+\endhead
+Antropología y arqueología (Antropología) & 0 & 2 \\
+Ciencias económicas y administrativas (Economía) & 1 & 1 \\
+Ciencias jurídicas y políticas (Ciencia política) & 2 & 1 \\
+Psicología & 1 & 2 \\
+Sociología & 1 & 2 \\
+\bottomrule()
+\end{longtable}
+
+Las entrevistas semiestructuradas se realizaron a través de
+videollamada, con una duración entre cuarenta minutos y una hora. Se
+abordaron tópicos relativos a la familiarización y conocimiento de los
+investigadores respecto a la ciencia abierta, su participación en
+prácticas de ciencia abierta, sus actitudes y valoraciones frente a
+prácticas de apertura y transparencia, así como frente a una futura
+posible obligatoriedad de tales, entre otros.
+
+Se empleó análisis temático, en tanto es un método que permite
+identificar y describir patrones de significados (Braun \& Clarke 2006),
+así como el conjunto de relaciones y jerarquías que entre estos se
+generan, organizados en torno al concepto de ciencia abierta y las ideas
+asociadas a este, a partir de códigos tanto semánticos como latentes
+(Boyatzis, 1998). En este sentido, este método es particularmente útil
+para comprender los puntos de vista, conocimientos, experiencias y
+valores de los participantes respecto a la ciencia abierta, a partir del
+conjunto de datos.
+
+El análisis fue realizado principalmente por dos investigadores, apoyado
+por el software de análisis cualitativo ATLAS.ti en su versión 9.0.5. El
+proceso de codificación fue realizado simultáneamente por ambos
+investigadores y discutido en reuniones periódicas con el equipo de
+investigación, con fines de asegurar triangulación entre investigadores
+a lo largo del proceso de análisis (Nowell et al., 2017). Asimismo, se
+archivaron sistemáticamente versiones del proyecto y sus productos, a la
+vez que se llevó el registro de las reflexiones personales de los
+investigadores y las discusiones de equipo en torno al análisis en un
+diario reflexivo, para poder resguardar la auditabilidad del proceso de
+investigación (Silver y Lewins, 2007).
+
+\bookmarksetup{startatroot}
+
+\hypertarget{anuxe1lisis}{%
+\chapter{Análisis}\label{anuxe1lisis}}
+
+\textbf{Un concepto difuso}
+
+Inicialmente el concepto de ciencia abierta aparece como una idea
+difícil de definir, aparentemente lejana para los participantes.
+Enfrentados a la primera pregunta de la entrevista, `¿Está familiarizado
+con el tema de la ciencia abierta?', la mayoría de los participantes
+proporcionaron una respuesta insegura o redirigieron la pregunta al
+investigador, varios reconociendo que escasamente habían escuchado
+hablar del tema. Esto, sin embargo, coexiste con diferentes grados de
+conocimiento de los problemas que enfrenta la ciencia abierta, prácticas
+comunes de apertura y transparencia y, en ocasiones, experiencias de
+investigadores que habían participado directamente en una serie de
+iniciativas institucionales o internacionales de ciencia abierta. Por
+ejemplo, se han propuesto protocolos de pre-registro y apertura de datos
+para ciertos tipos de investigaciones (Ciencia política, métodos
+mixtos). En este sentido, señalan que están poco familiarizados con la
+idea de ciencia abierta, y no asocian necesariamente el concepto de
+ciencia abierta a prácticas e iniciativas de ciencia abierta concretas.
+
+En lugar de mencionar prácticas concretas de ciencia abierta, el
+concepto es asociado principalmente a una variedad de iniciativas y
+orientaciones normativas de la investigación. Se asocia fuertemente el
+concepto con iniciativas de vinculación con el medio y divulgación
+científica, así como con el acceso de la población general a los
+resultados de investigación, particularmente ``las comunidades'' y el
+público extra-académico. También algunos entrevistados asocian el
+concepto de ciencia abierta a la producción de conocimiento, refiriendo
+al involucramiento de participantes, comunidades y grupos de interés en
+el proceso de investigación; el empleo de métodos mixtos (Sociología,
+cualitativos) o la interdisciplinariedad (Antropología, cualitativos;
+Sociología, cualitativos). Sólo unos pocos hacen referencia a prácticas
+como la apertura de datos o la publicación en revistas open-access.
+
+Si bien el concepto es difícil de delimitar en los discursos de los
+participantes, queda en evidencia una valoración general positiva de la
+idea de la ciencia abierta. Exceptuando a un par de investigadores que
+hacen referencia a la ciencia abierta como una ``fiebre'' extendida o
+como un ``proyecto demasiado ambicioso'', las valoraciones iniciales
+suelen ser a favor de la ciencia abierta. Algunas de estas valoraciones
+son vagamente positivas, mientras que en otros casos se relaciona
+directamente la idea de ciencia abierta con valores democráticos,
+señalando que la ciencia abierta avanza hacia la democratización del
+conocimiento y la ciencia. Cabe destacar que la mayor parte de las
+valoraciones positivas respecto a la ciencia abierta son expresadas por
+los participantes al comienzo de la entrevista, pero luego se presentan
+opiniones ambivalentes o dubitativas, e incluso contradiciéndose al
+concluir la entrevista. Esto sobre todo a raíz de diversas
+preocupaciones asociadas a una posible obligatoriedad de las prácticas
+de ciencia abierta, lo cual se abordará posteriormente.
+
+\textbf{Ambivalencia sobre la crisis de apertura}
+
+Si bien no se menciona explícitamente la existencia de una crisis de
+apertura del acceso a las publicaciones científicas, a la vez que en
+pocas ocasiones se mencionan las malas prácticas académicas como una
+problemática extendida, existe un acuerdo transversal respecto al
+diagnóstico de un poder editorial mundial con un rol predominante de los
+capitales del norte global, que coarta el libre acceso a los productos
+de investigación. Desde esta base, hay quienes perciben que la situación
+del poder editorial tiene efectos importantes y, por lo tanto,
+diagnostican una crisis de acceso, mientras otros perciben que los
+efectos son mínimos o no presentan un problema práctico para la
+producción científica.
+
+Entre quienes consideran que la crisis de acceso es problemática, se
+señala que esta genera desigualdades entre investigadores, tanto entre
+el Norte y el Sur global, como entre investigadores pertenecientes a
+instituciones con menores recursos, como podría ser el caso de los
+investigadores de centros de estudios pequeños o de universidades
+regionales.
+
+\begin{verbatim}
+(...) los precios son absurdos, muy absurdos. Son para alguien que vive en Chicago o en Suiza, y que gana como tal (...) Es privativo, para nosotros es absurdo. (Psicología, cuantitativa)
+
+Y nuestras universidades del sur, sur global, no tienen acceso a estas revistas, porque estas revistas son en dólares o en euros y el pack de acceso a esas revistas, que está vendido por estas empresas, es carísimo. Nuestras universidades, la gran parte, no pueden pagar, especialmente las universidades regionales (...) (Antropología, cualitativa)
+\end{verbatim}
+
+Por otro lado, se reconoce que la crisis de apertura tiene consecuencias
+negativas para el presupuesto público y el desarrollo desde la ciencia,
+especialmente en los países del Sur. Se cuestiona el sistema editorial
+como uno que no es sólo injusto para los investigadores en el campo,
+sino también para las naciones. Esta situación es catalogada como
+absurda, vergonzosa e inexplicable, como ilustran las siguientes citas:
+
+\begin{verbatim}
+(...) hay situaciones que sí me parecen claramente absurdas (...) que después ciertas organizaciones locales quieran acceder a ese conocimiento financiado por el Estado de Chile, y se les cobre por algo que ellos mismos han pagado desde sus impuestos para producir conocimiento para el desarrollo nacional. (Sociología, cualitativa)
+
+lo que estamos viviendo ahora es un mecanismo de transferencia de capital de los estados del sur global al norte global vergonzoso (...) Usando plata de los contribuyentes chilenos para financiar la publicación de artículos científicos por empresas que después venden estos artículos a las universidades chilenas, al precio nada barato de 65 dólares el texto (Antropología, cualitativa)
+\end{verbatim}
+
+Sin embargo, la existencia de este sistema de transferencia global no es
+visto por todos los investigadores como una situación crítica. En
+contraste, algunos investigadores señalaron que las instituciones están
+avanzando para mejorar el acceso a través de los sistemas de
+bibliotecas, percibiendo que sus propias instituciones les permiten
+acceder a toda la información que necesitan.
+
+Otros señalan que en América Latina las prácticas de acceder a productos
+científicos como pre-print o working paper, a través de mecanismos
+informales o mediante piratería, son extendidas entre los investigadores
+y permiten hacer frente al problema del acceso sin mayores
+consecuencias.
+
+\begin{verbatim}
+A ver, todas estas revistas... todos tenemos formas de ir por el costado, ¿no? (Ciencia política, métodos mixtos)
+
+Bueno, al final, por un lado o por otro, uno consigue los artículos que le interesan. Ya sea por contacto directo con, o porque tiene un amigo que está en no-sé-dónde, y yo creo que en mi, ya más o menos larga experiencia en investigación, creo que una vez pagué por un artículo, hace como 20 años, una época en que internet no estaba tan desarrollado (Psicología, cuantitativo)
+\end{verbatim}
+
+\textbf{Actitudes, creencias y prácticas de Ciencia Abierta}
+
+\begin{verbatim}
+a) Apertura de resultados
+\end{verbatim}
+
+Lo primero a destacar es que hay consenso respecto a que la apertura de
+los resultados debiese ser prioridad en lo que respecta al avance en
+ciencia abierta. El compartir publicaciones de manera formal, por
+ejemplo, publicando en revistas Open Access o con Ruta Dorada
+(Psicología, cuantitativo; Antropología, cualitativo); o informal, por
+medio de la publicación o la posibilidad de solicitud de versiones
+finales o working paper o pre-print de las publicaciones en redes
+sociales académicas como Academia.edu o ResearchGate, en Twitter o en
+páginas web propias, son prácticas extendidas entre la gran mayoría de
+los entrevistados. Asimismo, hay una creencia general respecto de que la
+apertura de resultados es igualmente exigible a investigaciones
+cuantitativas y cualitativas, sobre todo cuando estas son financiadas
+con fondos públicos.
+
+En relación con la iniciativa de compartir y solicitar artículos o
+versiones previas a la publicación oficial en redes sociales académicas,
+destacan dos actitudes por parte de los investigadores. Primero, aquella
+según la cual esas iniciativas son cuestionables, en tanto los
+investigadores se fundamentarían en razones entre el egoísmo y el
+altruismo (Psicología, cuantitativos; Sociología, cualitativos) a la
+hora de establecer tales relaciones de intercambio en estas redes. Ello
+se debe a que esta actitud moralmente deseable de colaboración
+científica permite, a la vez, conseguir un mayor número de citas, lo
+cual va en la línea de los requisitos de financiamiento de investigación
+que se abordarán posteriormente. Se percibe, entonces, la idea de que el
+altruismo de compartir las publicaciones tiende a verse colonizado por
+la racionalidad de los requisitos que impone la política de
+financiamiento a la producción científica. Esto entrega una imagen
+parcialmente negativa frente a la práctica, por lo que algunos
+investigadores fundamentan el no compartir sus productos académicos en
+estas plataformas, por demostrar que no comparten estas motivaciones
+egoístas
+
+\begin{verbatim}
+(...) a uno le conviene, entre comillas, egoístamente, compartir tus datos y compartir tus códigos. Porque, voy a decirlo brutalmente, te van a citar más. Tú vas a ser más, tu trabajo va a ser más divulgado y mejor divulgado. (Psicología, cuantitativos)
+
+No tengo, no tengo la pretensión de hacerme famoso ni que me citen mucho. Para mí mi trabajo se termina publicando. Después... qué sé yo. (Ciencia política, métodos mixtos)
+\end{verbatim}
+
+Por otro lado, hay casos en los que esta práctica se realiza con ciertas
+preocupaciones, en la medida que se conoce la existencia de la cláusula
+de no difusión que suelen integrar las revistas con barreras de pago al
+acceso. De ese modo, una sensación de que la fiscalización no es lo
+suficientemente fuerte como para ser problemática (Economía,
+cuantitativos) convive con la preocupación de ser amenazados por las
+revistas en caso de que se den cuenta de que realizan estas prácticas.
+Tal temor se ve reforzado por las conversaciones que los investigadores
+mantienen con sus pares respecto del respeto de la cláusula de no
+difusión (Psicología, cuantitativos), sin que ningún investigador
+entrevistado declarase haber sido fiscalizado efectivamente por haber
+publicado sus investigadores en estos medios. Sin embargo, la alta
+valoración positiva de la apertura de resultados motiva a los
+investigadores a compartir sus publicaciones en estas redes sociales
+pese a los posibles problemas legales que ello pueda producir.
+
+Así, siguiendo con el ánimo de hacer accesibles los resultados de sus
+proyectos de investigación, los investigadores han buscado medios
+legales y formales para lograrlo. Uno de estos ha sido la Ruta Dorada,
+alternativa que presentan algunas revistas para, contra pago del
+investigador, permitir que una publicación sea de libre acceso.
+
+En general, la experiencia de publicar pagando la Ruta Dorada es
+descrita negativamente. Algunos investigadores han destacado que no
+volverían a pagar para que una de sus publicaciones sea de libre acceso
+(Psicología, cuantitativos; Antropología, cualitativos). Esto se debe,
+principalmente, debido al alza en las tarifas de apertura, que se han
+tendido a multiplicar en los últimos años, lo cual se ha calificado como
+absurdo (Psicología, cuantitativos). Esto ha motivado a los
+investigadores a cuestionar a los investigadores qué tan verdaderamente
+se encuentran estas iniciativas enmarcadas en los principios de la
+ciencia abierta, entre los cuales destaca el enfrentamiento al gran
+poder de mercado de las compañías editoriales. En ese sentido, se
+destaca el hecho de que los costos han pasado de los usuarios a los
+investigadores (Psicología, cuantitativos). No obstante, algunos
+investigadores señalan que muchas revistas basan su funcionamiento en el
+referato gratuito, de modo que alguien debe hacerse cargo de los costos
+que implica la apertura de las publicaciones en la medida que la
+principal fuente de ingresos de muchas compañías editoriales está en la
+venta del acceso a las publicaciones (Ciencia política, métodos mixtos).
+
+Otra vía a través de la cual los investigadores buscan permitir que los
+resultados que han producido tengan impacto social es la publicación de
+columnas y editoriales en medios de prensa escrita (Psicología,
+cuantitativo), creación de documentales (Sociología, cualitativo),
+instancias de devolución con las comunidades investigadas u otras con
+características similares (Antropología, cualitativo; Psicología,
+cuantitativo), entre otros. Se destacan las tensiones que pueden existir
+entre el ranking de impacto de las revistas en que se publica, y el
+impacto real que tienen las investigaciones en las sociedades que
+analizan. Destaca el relato de una investigadora que, luego de publicar
+una investigación en una revista abierta en español pero de bajo
+impacto, fue invitada por el Gobierno para asesorar políticas de su área
+investigativa, lo cual no hubiese pasado de haber publicado tales
+resultados en una revista con barreras de pago (Psicología,
+cuantitativo).
+
+En esa línea, es posible identificar actitudes generalmente negativas
+hacia la política de difusión de resultados de ANID, con base en las
+percepciones de deficiencia de esta a la hora de lograr volver público
+el conocimiento producido con fondos públicos. Los entrevistados dan
+cuenta de la rigidez de la política, en la medida que dificulta la
+realización de ciertas iniciativas de difusión dirigidas a público
+extra-académico, como la publicación de Podcasts. Además, se releva que,
+si bien en ciertos grupos de estudio como Sociología y Ciencias de la
+Información productos de difusión como documentales son bien
+considerados, la estructura de financiamiento sigue otorgando un rol
+central a la publicación en revistas indexadas a Web of Science (WOS) y
+Scopus. Lo mismo sucede con publicar en revistas de libre acceso en
+español que, en general, tienden a tener un bajo impacto académico pese
+a ser más accesibles para el público en general.
+
+Ello tiene como consecuencia que los resultados de mayor relevancia
+científica se destinen a revistas con barreras de pago, a las cuales no
+puede acceder gran parte del público. A su vez, ello conlleva una
+``transferencia de capital del sur al norte global'' (Antropología,
+cualitativos), en la medida que investigaciones financiadas con recursos
+estatales son publicadas en revistas con barreras de pago, a las cuales
+los investigadores nacionales o sus universidades deberán pagar - en
+general, con fondos públicos - para poder acceder a ellos.
+
+Los entrevistados constatan, en ese sentido, tensiones entre el
+imperativo de avanzar en la apertura y difusión de los resultados
+generados en las investigaciones financiadas con recursos públicos, la
+rigidez de la política de difusión de ANID, y la estructura de
+financiamiento e incentivos de esta última, en un contexto en que las
+compañías editoriales presentan un ``alto poder de mercado'' (Economía,
+cuantitativos). Así, para cumplir con la presión por publicar en
+revistas de alto impacto producida por la estructura de financiamiento
+de ANID, así como con los principios de apertura y difusión a los cuales
+adscriben, los investigadores han desarrollado diversas técnicas para
+diversificar los productos que publican. Una de ellas es la quema o
+sacrificio de publicaciones, la cual consiste en diferir los resultados
+generados en el proceso investigativo, enviando unos a revistas de mayor
+impacto ---que otorgan un mayor puntaje a la hora de postular a fondos
+de investigación---, así como otros a revistas locales, abiertas y,
+muchas veces, en español:
+
+\begin{verbatim}
+[...] publicamos en una revista que es... Creo que es sólo SciELO [...] He publicado cosas mucho mejores, digamos, en mejores revistas que esa, y nunca me habían llamado del Ministerio [...] Y por este artículo nos llamaron, nos pidieron una entrevista, justamente ayer tuvimos que hacer una presentación para todos los equipos que trabajaban en la temática en la que nosotros investigamos. Entonces [...] es necesario hacer ese esfuerzo de, de repente, sacrificar, entre comillas, algunos datos y publicarlos en revistas que tienen menor indexación, porque finalmente esas son las que se difunden más y llegan más a donde uno... o al menos donde yo esperaría que llegaran, que es donde se pueden tomar decisiones [...] (Psicología, cuantitativos)
+\end{verbatim}
+
+En lo que respecta al acceso a publicaciones científicas, los
+entrevistados han destacado el papel que desempeñan poseen las
+universidades eny que se desempeñan a través de sus bibliotecas. Por
+ello, y como se señaló en apartados anteriores, los entrevistados
+tienden a plantear que no han tenido dificultades para acceder a
+publicaciones. Es posible, sin embargo, constatar una diferencia:
+mientras que investigadores vinculados a universidades prestigiosas y de
+la Región Metropolitana señalan que nunca han tenido dificultades de
+acceso en tanto la biblioteca de su universidad les provee toda la
+literatura a la cual necesitan acceder; los investigadores que trabajan
+en universidades ubicadas en otras regiones del país destacan, más bien,
+la ampliación que han experimentado de manera progresiva gracias a la
+inversión y al trabajo que se ha realizado por parte de las bibliotecas
+de sus instituciones educativas.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Transparencia del diseño
+\end{enumerate}
+
+Sólo algunos entrevistados declararon haber publicado un pre-registro de
+sus investigaciones en la web Open Science Framework (Psicología,
+cuantitativos; Ciencia política, métodos mixtos), o bien, a partir de
+iniciativas levantadas por revistas (Ciencia política, métodos mixtos;
+Economía, cuantitativos). En el caso de economía se declara que el
+pre-registro es una práctica extendida y centralizada en los protocolos
+generados por la American Economic Association, lo cual ha sido evaluado
+de forma positiva pero, en algunos casos, como un estándar excesivo.
+Esto último, sobre todo en la medida en que las revistas de la
+disciplina han tendido a estandarizar el pre-registro de hipótesis como
+requisito para publicar resultados de investigación. Asimismo, destaca
+el que un entrevistado haya enviado a revisión editorial un pre-registro
+de unas investigaciones, en un número especial para este tipo de
+productos. Lo anterior es indicativo del rol que las iniciativas
+editoriales cumplen a la hora de incentivar prácticas de transparencia
+en el proceso de investigación.
+
+Del mismo modo, ha de destacarse que buena parte de los entrevistados no
+conocían el concepto de pre-registro. Los entrevistados familiarizados
+con el pre-registro sin practicarlo presentan diversas justificaciones
+para ello. Por una parte, se destaca que el pre-registro sólo
+corresponde a cierto tipo de investigaciones - particularmente,
+cuantitativas con hipótesis -, por lo cual es una práctica que tiende a
+carecer de sentido (Psicología, cualitativos; Economía, cuantitativos).
+Por otra, se argumenta que el pre-registro de la investigación antes de
+su ejecución puede constituir una ``camisa de fuerza'' (Ciencia
+política, cualitativos), sobre todo en caso de seguir una lógica
+inductiva, dada la dificultad de asegurar una relación estrecha entre lo
+diseñado y los hallazgos finales. Se destaca que el diseño sólo existe
+en su ejecución (Sociología, cualitativos), por lo cual publicarlo antes
+de llevar adelante la investigación sería problemático. Los
+investigadores principalmente cualitativos destacan, entonces, las
+limitaciones metodológicas a las que se enfrentarían a la hora de
+pre-registrar una investigación de tales características.
+
+Junto con las limitaciones metodológicas a la práctica del pre-registro
+destacan preocupaciones asociadas a la amenaza que puede implicar para
+los derechos de propiedad intelectual el publicar diseños de
+investigaciones que todavía no son llevadas a cabo. Si bien hay quienes
+destacan la compatibilidad entre el resguardo de la propiedad
+intelectual y el pre-registro de los diseños en la medida que esto
+último permite asegurar la autoría de una investigación antes de
+ejecutarla (Ciencia política, métodos mixtos), otros entrevistados ponen
+sobre la mesa su preocupación por perder ideas de investigación
+originales. Esto está muchas veces asociado a que gran parte de su
+capacidad de publicar en revistas de alto impacto - y, por ende, de
+cumplir los lineamientos de la estructura de financiamiento de la
+Agencia Nacional de Investigación y Desarrollo (ANID) - se debe a la
+originalidad de sus diseños de investigación (Psicología,
+cuantitativos). Sumando a ello malas experiencias previas, como la
+ejecución de un diseño de investigación original por parte de un centro
+de investigación renombrado del Norte global, el pre-registro es una
+práctica frente a la cual los investigadores tienden a presentar una
+actitud suspicaz.
+
+Pese a destacar el hecho de que el pre-registro de hipótesis permite
+asegurar que una investigación no incluye prácticas como el HARKing
+(Economía, cuantitativos), el bajo conocimiento y formación en esta
+práctica; su asociación a ciertos tipos de investigación; las
+limitaciones metodológicas planteadas; y las preocupaciones asociadas a
+las presión por publicar que señalan los entrevistados están a la base
+de las sospechas y consiguiente generalización de no practicar el
+pre-registro.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Apertura de datos
+\end{enumerate}
+
+Entre los entrevistados predomina una actitud generalmente favorable
+respecto a la apertura de datos como iniciativa, sin embargo, sólo dos
+entrevistados han disponibilizado sus datos en la práctica ( ). Esta
+contradicción se sostiene en creencias de dificultad técnica o
+metodológica para la publicación de los datos, la aparente inutilidad de
+la apertura de datos, y la tensión que existe entre perder la
+exclusividad de uso de los datos y la presión por publicar, suponiendo
+que la práctica de apertura de datos constituye un riesgo para la
+carrera académica.
+
+En cuanto a las actitudes positivas frente a la apertura de datos, estas
+se fundamentan principalmente en la creencia de que esta es útil para el
+desarrollo de la ciencia, abriendo la posibilidad de reproducir los
+análisis y mejorar la calidad de conocimiento, favoreciendo el impacto
+científico de las publicaciones asociadas a los datos, permitiendo
+ahorrar recursos humanos y monetarios destinados a la producción de
+datos, y reduciendo el impacto que tiene la producción de datos en
+comunidades marginadas o grupos sociales estudiados con mayor
+frecuencia. Especialmente en el caso de las investigaciones financiadas
+con fondos públicos, la mayoría de los investigadores mostraron una
+actitud altamente favorable a la apertura de datos, y varios señalaron
+que debería ser un requisito más enfático u obligatorio. Algunos
+investigadores incluso sostuvieron la idea de que los datos en este tipo
+de investigaciones son bienes públicos, y la no disponibilización de los
+datos se percibía como un acaparamiento ilegítimo ( quizás reemplazar
+por idea del imperativo moral).
+
+Por otro lado, algunos investigadores fueron menos severos con respecto
+a la obligatoriedad de la apertura, destacando la inversión personal del
+investigador en la producción de los datos y el costo extra que implica
+su disponibilización. Además, algunos señalan que los datos son, al
+menos por un tiempo, propiedad del investigador, en tanto su producción
+requiere trabajo de innovación y creatividad, establecimiento de
+relaciones con los sujetos de estudio o instituciones, y su producción
+no puede ser entendida solamente como una inversión de recursos en manos
+del investigador, sino como producción intelectual. En este sentido,
+entra en tensión la apertura de datos y la presión por publicar, no sólo
+por el tiempo que el investigador deba dedicar a la apertura, sino
+también por la presión por productos científicos con preguntas o diseños
+originales y novedosos. Varios investigadores asocian la apertura de los
+datos a la pérdida de control sobre su uso, y la posible dificultad de
+publicar utilizando datos abiertos. Asimismo, algunos investigadores
+cuestionan el sentido de abrir los datos, señalando que es poco común
+que otros investigadores usen los datos, sosteniendo que es difícil
+utilizar datos públicos de forma novedosa porque ya han sido utilizados,
+y que no necesariamente se adecúan a la especificidad de la
+investigación en ciencias sociales:
+
+\begin{verbatim}
+[...] en la ciencia social [...] la relación con los datos [es] una relación que tiene sentido y que es significativa en la medida que se produce en el marco de estos programas de investigación más amplios. [...] Hay una especie de fantasía, de que si liberamos los datos y están todas las entrevistas y todas las bases de datos, '¡oh sí!', o sea, creo que el trabajo de investigación científica tiene un nivel de complejidad, de especificidad, que haría una alerta [...] sobre la fantasía de que se liberan los datos, las entrevistas, y vamos a comenzar a producir mucho conocimiento muy valioso, muy significativo. (Sociología, cualitativos)
+\end{verbatim}
+
+Acompañando esta actitud suspicaz respecto a la utilidad de la apertura
+de datos, los entrevistados señalan los costos metodológicos y riesgos
+éticos que perciben los investigadores en la práctica. Por un lado, la
+totalidad de los investigadores consideran que la mayor parte de los
+datos cuantitativos no debieran requerir protocolos especiales de ética
+ni condiciones de uso, exceptuando por datos producidos en poblaciones
+específicas o en los estudios de economía en que los datos pertenecen a
+empresas privadas. Por otro lado, la apertura de datos cualitativos
+presenta especial dificultad en el resguardo de la identidad de los
+participantes en el trabajo con comunidades específicas, además de
+requerir muchos recursos humanos para su anonimización, y el riesgo de
+afectación a las comunidades excede su anonimato, siendo también
+respecto al contenido de lo que se publica cuando el investigador no
+mantiene una relación directa de rapport con la comunidad. Esto a su vez
+se relaciona con una dificultad metodológica, ya que los datos
+cualitativos al estar anonimizados y descontextualizados, limitan el
+análisis de datos secundarios y desincentivan su uso.
+
+Cabe destacar que a pesar de la percepción de diferencias en facilidad y
+pertinencia de apertura entre datos cualitativos y cuantitativos, sólo
+dos de los investigadores entrevistados, uno cualitativo y uno
+cuantitativo, habían practicado alguna vez la publicación abierta de
+datos más allá de los requisitos editoriales y de compartir datos
+directamente con otros investigadores.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Transparencia del análisis:
+\end{enumerate}
+
+Debe destacar una valoración general positiva hacia la transparencia de
+los análisis, entendida en sentido amplio y diferido según el tipo de
+investigación transparentada. En primer lugar, existe una percepción
+generalizada respecto de que las revistas de alto impacto están
+exigiendo, cada vez más, apartados metodológicos más claros y detallados
+para las investigaciones cualitativas; así como la solicitud de los
+códigos de análisis para investigación cuantitativas, sobre todo en
+economía. En ese sentido, la transparencia del análisis también se
+asocia a la rigurosidad de los procedimientos analíticos ejecutados y,
+entonces, a la validez de los resultados presentados.
+
+En ese aspecto, se describen prácticas y expectativas distintas en lo
+que respecta a la transparencia de los análisis realizados en
+investigaciones cualitativas o cuantitativas. En lo que respecta a las
+primeras, la transparencia del análisis está sobre todo vinculado con la
+claridad del apartado metodológico de la publicación, a lo cual pueden
+sumarse anexos metodológicos que incluyan explicaciones más detalladas
+respecto de los procedimientos analíticos realizados. No obstante, no se
+hace mayor referencia a la publicación de otros insumos, como el libro
+de códigos generados, outputs de los softwares utilizados, entre otros.
+En ese sentido, no existe para estos investigadores entre transparencia
+de los procedimientos de análisis, y expectativas de reproducibilidad ni
+replicabilidad de los hallazgos producidos. Más aún, hay quienes
+descartan la posibilidad de reproducir los procedimientos de análisis
+dada la hiper-contextualización característica de los datos
+cualitativos: aun teniendo acceso a los datos y procedimientos de
+análisis producidos, la posibilidad de llegar a conclusiones no es tan
+clara para los investigadores cualitativos. Asimismo, se considera que
+la propia ontología de la sociedad, dinámica y en continua
+transformación, sería una gran traba a la hora de replicar diseños de
+investigación en realidades sociales distintas, o bien pertenecientes a
+otros momentos históricos.
+
+Por su parte, la transparencia de análisis cuantitativos tiende a
+asociarse a la disponibilización (pública o privada) de los códigos de
+análisis elaborados. Destaca el hecho de que, muchas veces, esta
+disponibilización tiende a solicitarse desde las revistas académicas. Si
+bien no se tematiza del todo, es posible inferir que la mayor extensión
+de la utilización de software para estos procedimientos, en comparación
+con lo que sucede en investigación cualitativa, tienda a facilitar la
+consolidación de un conjunto de prácticas y actitudes más favorables
+hacia la transparencia de los análisis. No obstante, ninguno de los
+investigadores entrevistados declaró haber publicado abiertamente su
+código de análisis, en tanto estos tienden a solicitarse y compartirse
+de manera privada, bien a través de redes sociales académicas como las
+expuestas en apartados anteriores; bien a través de contacto personal
+entre investigadores. Además, se plantea que los códigos de análisis son
+como los ``cepillos de dientes'' (Economía, cuantitativos), en el
+sentido de que su elaboración tiende a ser personal y no pensada para
+compartirlo abiertamente con otros investigadores. Sumando a ello
+complicaciones adicionales respecto de condiciones éticas o
+metodológicas que impidan o dificulten el compartir los datos
+analizados, se destaca la insuficiencia que conlleva publicar estos
+códigos sin un gran cuidado de su orden, claridad, y de los
+procedimientos ejecutados, identificando la necesidad de un formato
+común en este aspecto. En último lugar, una informante afirma que los
+investigadores cuantitativos no han migrado a la utilización de software
+de código abierto por el costo que implicaría para ellos, pues el
+estándar de disciplinas como la economía está constituido por software
+con barreras de pago y no existe el incentivo suficiente para realizar
+un cambio masivo en este aspecto.
+
+Un segundo aspecto que está a la base de la valoración transversalmente
+positiva frente a la transparencia de los procedimientos de análisis
+está en la importancia que esto puede implicar para el avance de la
+ciencia y para el aprendizaje metodológico de otros investigadores. Una
+investigadora cualitativa rememora cómo académicas de otros países de
+América Latina, inspiradas en sus investigaciones, le han escrito para
+comentarle que están utilizando sus textos como insumo
+teórico-metodológico para elaborar sus propias investigaciones.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{resultados}{%
+\chapter{Resultados}\label{resultados}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{discusiuxf3n}{%
+\chapter{Discusión}\label{discusiuxf3n}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{referencias}{%
+\chapter*{Referencias}\label{referencias}}
+\addcontentsline{toc}{chapter}{Referencias}
+
+\markboth{Referencias}{Referencias}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\end{CSLReferences}
+
+
+
+\end{document}

@@ -1,0 +1,27 @@
+project:
+  type: book
+
+book:
+  title: "paper-entrevistas-CA"
+  author: "LISA - COES"
+  date: "04-20-2023"
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 02-antecedentes.qmd
+    - 03-metodo.qmd
+    - 04-analisis.qmd
+    - 05-resultados.qmd
+    - 06-discusion.qmd 
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
