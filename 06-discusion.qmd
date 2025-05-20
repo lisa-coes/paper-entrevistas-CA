@@ -1,5 +1,0 @@
----
-title: "Discusión"
-format: html
----
-

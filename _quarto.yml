@@ -13,7 +13,6 @@ book:
     - 03-metodo.qmd
     - 04-analisis.qmd
     - 05-resultados.qmd
-    - 06-discusion.qmd 
     - references.qmd
 
 bibliography: references.bib

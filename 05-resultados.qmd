@@ -3,8 +3,6 @@ title: "Resultados"
 format: html
 ---
 
-# Discusión
-
 ## Bajo conocimiento, pocas prácticas.
 
 Ambos estudios apuntan a un niveles medios o bajos de conocimiento de conceptos relacionados a la ciencia abierta, y niveles aún más bajos de prácticas. El concepto es asociado, principalmente, a la apertura de resultados. Ahora bien, el estudio cualitativo apunta a que ésta no se entiende únicamente como publicación en revistas de acceso abierto, sino también a otras formas de vincularse con la comunidad y de generar impacto --- entendido más allá de las métricas de las revistas académicas.

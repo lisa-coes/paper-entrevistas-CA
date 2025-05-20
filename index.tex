@@ -9,7 +9,6 @@
   numbers=noendperiod]{scrreprt}
 
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -19,6 +18,10 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -40,14 +43,28 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
+\makeatletter
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
   \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\makeatother
 
 
 \providecommand{\tightlist}{%
@@ -74,33 +91,41 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
   % turn on hanging indent if param 1 is 1
   \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
   \fi
   % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
 \usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \KOMAoption{captions}{tableheading}
-\makeatletter
-\makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -140,21 +165,17 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
+\makeatother
+\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-\makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
-\makeatother
-\makeatletter
-\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
-\makeatother
-\makeatletter
-\makeatother
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -167,13 +188,13 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
+
 \title{paper-entrevistas-CA}
 \author{LISA - COES}
-\date{4/20/23}
+\date{2023-04-20}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, enhanced, interior hidden, borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -181,10 +202,10 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+
 \bookmarksetup{startatroot}
 
-\hypertarget{preface}{%
-\chapter*{Preface}\label{preface}}
+\chapter*{Preface}\label{preface}
 \addcontentsline{toc}{chapter}{Preface}
 
 \markboth{Preface}{Preface}
@@ -204,8 +225,7 @@ Quarto books. Para más información, visitar
 
 \bookmarksetup{startatroot}
 
-\hypertarget{introducciuxf3n}{%
-\chapter{Introducción}\label{introducciuxf3n}}
+\chapter{Introducción}\label{introducciuxf3n}
 
 Durante los últimos años, el mundo académico ha experimentado una serie
 de desafíos relacionados con el concepto de apertura, que pueden
@@ -288,8 +308,7 @@ políticas científicas.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{antecedentes}{%
-\chapter{Antecedentes}\label{antecedentes}}
+\chapter{Antecedentes}\label{antecedentes}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -303,8 +322,7 @@ políticas científicas.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{muxe9todo}{%
-\chapter{Método}\label{muxe9todo}}
+\chapter{Método}\label{muxe9todo}
 
 Se realizaron 13 entrevistas semiestructuradas a investigadores
 empíricos de ciencias sociales, seleccionados a partir de un muestreo
@@ -327,16 +345,17 @@ aleatorizó hasta asegurar la selección de, al menos, un sociólogo. La
 siguiente tabla da cuenta de la composición final de la muestra:
 
 \begin{longtable}[]{@{}lll@{}}
-\toprule()
+\toprule\noalign{}
 Grupo de estudio & Hombre & Mujer \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Antropología y arqueología (Antropología) & 0 & 2 \\
 Ciencias económicas y administrativas (Economía) & 1 & 1 \\
 Ciencias jurídicas y políticas (Ciencia política) & 2 & 1 \\
 Psicología & 1 & 2 \\
 Sociología & 1 & 2 \\
-\bottomrule()
 \end{longtable}
 
 Las entrevistas semiestructuradas se realizaron a través de
@@ -371,8 +390,7 @@ investigación (Silver y Lewins, 2007).
 
 \bookmarksetup{startatroot}
 
-\hypertarget{anuxe1lisis}{%
-\chapter{Análisis}\label{anuxe1lisis}}
+\chapter{Análisis}\label{anuxe1lisis}
 
 \textbf{Un concepto difuso}
 
@@ -883,25 +901,136 @@ teórico-metodológico para elaborar sus propias investigaciones.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{resultados}{%
-\chapter{Resultados}\label{resultados}}
+\chapter{Resultados}\label{resultados}
+
+\section{Bajo conocimiento, pocas
+prácticas.}\label{bajo-conocimiento-pocas-pruxe1cticas.}
+
+Ambos estudios apuntan a un niveles medios o bajos de conocimiento de
+conceptos relacionados a la ciencia abierta, y niveles aún más bajos de
+prácticas. El concepto es asociado, principalmente, a la apertura de
+resultados. Ahora bien, el estudio cualitativo apunta a que ésta no se
+entiende únicamente como publicación en revistas de acceso abierto, sino
+también a otras formas de vincularse con la comunidad y de generar
+impacto --- entendido más allá de las métricas de las revistas
+académicas.
+
+Esto, además, se encuentra relacionado a una serie de prácticas que
+apuntan a la apertura y la transparencia de los resultados de
+investigación. Así, en el estudio cualitativo fue posible observar
+recuentos de experiencias en publicaciones de acceso abierto, uso de la
+``Ruta Dorada'' y compartir artículos o pre-prints mediante redes
+sociales o privadas.
+
+Ahora bien, los niveles de conocimiento y prácticas bajan
+sustancialmente en lo relativo a conceptos y medidas relacionadas al
+diseño transparente, la apertura de datos y la transparencia de
+análisis. En general, el estudio cuantitativo parece distinguir que hay
+grupos de investigadores que muestran mayores niveles de conocimiento y
+prácticas, particularmente los investigadores más jóvenes y aquellos
+cuyo enfoque predominante es cuantitativo.
+
+El bajo nivel de conocimiento es reconocido como una de las principales
+barreras para llevar a cabo prácticas e implementar medidas concordantes
+a los principios de la ciencia. Sin embargo, prácticas relacionadas a la
+transparencia del diseño (como los prerregistros de hipótesis), a la
+apertura de datos (hacer datos públicos o compartirlos con otros
+investigadores), o a la transparencia del análisis (como compartir
+códigos de análisis), encuentran muchas más barreras y reticencia por
+parte de los investigadores.
+
+\section{Valoración positiva general, resquemores
+particulares}\label{valoraciuxf3n-positiva-general-resquemores-particulares}
+
+Como concepto general, la ciencia abierta es vista con buenos ojos. Se
+destaca que sus principios permitirían difundir mejor los resultados
+entre la comunidad científica, evitando malas prácticas como el
+p-harking. Además, aumentaría la posibilidad de generar impacto más allá
+de las métricas académicas, facilitando la lectura de los resultados por
+parte de las comunidades y los tomadores de decisiones. Esto se conjuga
+con una conciencia de que el financiamiento público de las
+investigaciones impone cierta responsabilidad de que los resultados y
+datos estén abiertos a la comunidad académica y general. Por ello, no
+resulta sorpresivo que el 90\% de los encuestados estén a favor de que
+ANID implemente políticas de acceso abierto.
+
+Sin embargo, una vez que se indagan en prácticas particulares, empiezan
+a surgir resquemores respecto a la posibilidad y la conveniencia de
+implementar medidas de ciencia abierta relacionadas a la transparencia
+del diseño, la apertura de datos y la transparencia en el análisis. Se
+identificaron tres nudos fundamentales:
+
+En primer lugar, la \textbf{dificultad de aplicar muchas de estas
+medidas en la investigación cualitativa}. Salvo por la apertura de
+resultados, la evaluación positiva de prácticas relacionadas a la
+ciencia abierta es mayor entre investigadores con enfoque cuantitativo,
+y menor entre quienes practican enfoques predominantemente cualitativos.
+Esto va en línea con los observado en el primer estudio, donde se
+observó como el prerregistro de hipótesis y la apertura de datos generan
+importantes choques a nivel epistemológico, metodológico y ético con los
+principios tradicionales de la investigación cualitativa. Del mismo
+modo, la crisis de reproducibilidad aparece como una preocupación mucho
+mayor entre los investigadores cuantitativos, en línea con lo observado
+en el primer estudio, donde se aprecia que la reproducibilidad apenas
+aparece en el horizonte de los investigadores cualitativos.
+
+En segundo lugar, la \textbf{dificultad de conciliar los principios de
+la ciencia abierta con los imperativos de productividad académica}
+impuestos por universidades y agencias públicas. Incluso la apertura de
+resultados, el principio con mayor legitimidad, debe enfrentar la
+dificultad de que la estructura de financiamiento y las políticas de
+difusión de ANID favorecen la publicación en revistas con barreras de
+pago. Por otro lado, medidas como el prerregistro y la apertura de datos
+levantan suspicacias sobre la protección de la propiedad intelectual de
+los investigadores, y que limitan la originalidad y el impacto de
+futuras publicaciones.
+
+Por último, se observaron \textbf{reticencias hacia las motivaciones}
+detrás de la implementación de estas medidas. Para algunos
+investigadores, estas prácticas estarían lejos de escapar de las
+criticadas lógicas de difusión y financiamiento. Por ejemplo, se
+argumenta que compartir resultados y datos reporta beneficios
+personales, mediante el aumento citas, en consonancia a las exigencias
+de productividad académica.
+
+En esa línea, el estudio cuantitativo apunta a que efectivamente
+construir redes y mejorar la visibilidad están entre las principales
+motivaciones para la apertura de datos, especialmente entre
+investigadores mujeres y de trayectorias académicas intermedias. Más
+allá de cualquier juicio moral sobre las motivaciones de estos
+investigadores, resultaría interesante indagar porque hay grupos
+específicos que estarían más inclinados a aceptar medidas de ciencia
+abierta por razones extrínsecas.
+
+\section{Valoración crítica de la política de difusión de la
+ANID.}\label{valoraciuxf3n-cruxedtica-de-la-poluxedtica-de-difusiuxf3n-de-la-anid.}
+
+Tanto en el estudio cualitativo como en el cuantitativo se pudo apreciar
+una percepción crítica hacia las políticas de difusión y de acceso
+abierto de la ANID. Principalmente, se observa una tensión entre la
+necesidad de transparencia e impacto en la comunidad de investigaciones
+financiadas con recursos públicos, y el esquema de financiamiento de
+ANID que favorece la publicación en revistas que, por lo general,
+presentan barreras de pago.
+
+Los investigadores asocian esto a dos problemas Por un lado, se percibe
+que limita la posibilidad real de impacto de las investigaciones,
+alejando sus resultados de las comunidades y de los tomadores de
+decisiones. Por otro lado, se pone en relieve que este esquema resulta
+en el uso de grandes cantidades recursos públicos para financiar el
+negocio de grandes compañías editoriales científicas del primer mundo.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{discusiuxf3n}{%
-\chapter{Discusión}\label{discusiuxf3n}}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{referencias}{%
-\chapter*{Referencias}\label{referencias}}
+\chapter*{Referencias}\label{referencias}
 \addcontentsline{toc}{chapter}{Referencias}
 
 \markboth{Referencias}{Referencias}
 
-\hypertarget{refs}{}
-\begin{CSLReferences}{0}{0}
+\phantomsection\label{refs}
+\begin{CSLReferences}{0}{1}
 \end{CSLReferences}
+
 
 
 
